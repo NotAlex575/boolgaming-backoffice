@@ -1,0 +1,33 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('videogames', function (Blueprint $table) {
+            $table->bigIncrements("id");
+            $table->string("nome");
+            $table->integer("pegi");
+            $table->date("release_date");
+            $table->string("immagine");
+            $table->decimal("prezzo", 5, 2)->default(0.00);
+            $table->string("descrizione");
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('videogames');
+    }
+};
