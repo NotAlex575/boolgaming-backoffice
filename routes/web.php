@@ -28,5 +28,8 @@ Route::middleware(['auth', 'verified'])
         Route::resource('videogames', VideogameController::class);
 });
 
+Route::fallback(function () {
+    return response()->view('error.404', [], 404);
+});
 
 require __DIR__.'/auth.php';

@@ -21,8 +21,8 @@ class FranchiseSeeder extends Seeder
 
         foreach($franchises as $franchise){
             $newFranchise = new Franchise();
-            $newFranchise ->nome = $franchise; 
-            $newFranchise ->save(); 
+            $newFranchise -> franchise_name = $franchise; 
+            $newFranchise -> save(); 
         }
     }
 }

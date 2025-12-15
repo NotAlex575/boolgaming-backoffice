@@ -11,9 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('franchises', function (Blueprint $table) {
-            $table->bigIncrements("id");
-            $table->string("franchise_name");
+        Schema::create('console_videogame', function (Blueprint $table) {
+            $table->id();
+
+            $table->foreignId("videogame_id")->constrained();
+            $table->foreignId('console_id')->constrained();
+
             $table->timestamps();
         });
     }
@@ -23,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('franchises');
+        Schema::dropIfExists('console_videogame');
     }
 };

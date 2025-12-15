@@ -33,7 +33,7 @@ class VideogameController extends Controller
 
         $genres = Genre::all();
 
-        return view("admin.videogames.index", compact("franchises","consoles", "genres"));
+        return view("admin.videogames.create", compact("franchises","consoles", "genres"));
     }
 
     /**
@@ -44,12 +44,13 @@ class VideogameController extends Controller
         $data = $request->all();
         $newVideogame = new Videogame();
         $newVideogame->nome = $data['nome'];
-        $newVideogame->code_id = $data['franchise_id'];
+        $newVideogame->franchise_id = $data['franchise_id'];
         $newVideogame->pegi = $data['pegi'];
         $newVideogame->release_date = $data['release_date'];
         $newVideogame->immagine = $data['immagine'];
         $newVideogame->prezzo = $data['prezzo'];
         $newVideogame->descrizione = $data['descrizione'];
+        $newVideogame->trailer = $data['trailer'];
         $newVideogame->save();
 
         // Dopo aver salvato il post, controllo se ho ricevuto le console e i genre
@@ -63,7 +64,7 @@ class VideogameController extends Controller
         if ($request->action === "save_add"){
             return redirect()->route("admin.videogame.create");
         }
-        return redirect()->route("admin.videogame.show", $newVideogame->id);
+        return redirect()->route("admin.videogames.show", $newVideogame->id);
     }
 
     /**
@@ -71,7 +72,7 @@ class VideogameController extends Controller
      */
     public function show(Videogame $videogame)
     {
-        return view("admin.videogames.index", compact("videogame"));
+        return view("admin.videogames.show", compact("videogame"));
     }
 
     /**
@@ -85,7 +86,7 @@ class VideogameController extends Controller
 
         $genres = Genre::all();
 
-        return view("admin.videogames.edit", compact("franchises","consoles","genres"));
+        return view("admin.videogames.edit", compact("videogame", "franchises","consoles","genres"));
 
 
     }
@@ -97,12 +98,13 @@ class VideogameController extends Controller
     {
         $data = $request->all();
         $videogame->nome = $data['nome'];
-        $videogame->code_id = $data['franchise_id'];
+        $videogame->franchise_id = $data['franchise_id'];
         $videogame->pegi = $data['pegi'];
         $videogame->release_date = $data['release_date'];
         $videogame->immagine = $data['immagine'];
         $videogame->prezzo = $data['prezzo'];
         $videogame->descrizione = $data['descrizione'];
+        $videogame->trailer = $data['trailer'];
         $videogame->update();
 
         // Dopo aver salvato il videogioco, controllo se ho ricevuto dei tag consoles
@@ -118,7 +120,7 @@ class VideogameController extends Controller
         } else {
             $videogame->genres()->detach();
         }
-        return redirect()->route("admin.videogame.show", $videogame);    
+        return redirect()->route("admin.videogames.show", $videogame);    
     }
 
     /**
@@ -133,6 +135,6 @@ class VideogameController extends Controller
         // Poi cancella il progetto
         $videogame->delete();
 
-        return redirect()->route("admin.videogame.index");
+        return redirect()->route("admin.videogames.index");
     }
 }
