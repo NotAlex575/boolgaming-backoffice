@@ -29,7 +29,14 @@
 
                     <p class="fs-5">{{ __('Sei loggato '. Auth::user()->name .'!') }}</p>
                     <p class="fs-5">Qui ci sono tutte le tabelle disponibili!</p>
-                    <a href="{{ url('/') }}" class="btn btn-outline-primary mt-3">Torna alla Home</a>
+                    <div class="d-flex row">
+                        <a href="{{ route('admin.videogames.index') }}" class="btn btn-success btn-lg px-5">
+                            Vai alla tabella dei Videogiochi
+                        </a>
+                        <a href="{{ url('/') }}" class="btn btn-outline-primary mt-3 w-20">
+                            Torna alla Home
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

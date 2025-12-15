@@ -6,5 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Console extends Model
 {
-    //
+    public function videogame()
+    {
+        return $this->belongsToMany(Videogame::class);
+    }
+
 }
