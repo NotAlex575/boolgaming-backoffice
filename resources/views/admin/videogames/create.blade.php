@@ -20,7 +20,7 @@
             <!-- Trailer videogioco -->
             <div class="col-12">
                 <label for="nome" class="form-label text-warning">Link Trailer videogioco</label>
-                <input type="text" class="form-control bg-secondary text-light border border-info" id="nome" name="nome" placeholder="Inserisci il nome del videogioco qui" required>
+                <input type="text" class="form-control bg-secondary text-light border border-info" id="trailer" name="trailer" placeholder="Inserisci il link del trailer del videogioco qui" required>
             </div>
 
             <!-- Franchise -->
