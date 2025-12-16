@@ -8,8 +8,8 @@ use App\models\Franchise;
 use App\Models\Franchise as ModelsFranchise;
 use App\models\Genre;
 use App\models\Videogame;
-
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class VideogameController extends Controller
 {
@@ -51,6 +51,12 @@ class VideogameController extends Controller
         $newVideogame->prezzo = $data['prezzo'];
         $newVideogame->descrizione = $data['descrizione'];
         $newVideogame->trailer = $data['trailer'];
+
+        if(array_key_exists("immagine", $data)){
+            $img_path = Storage::putFile("uploads", $data["immagine"]);
+            $newVideogame->immagine = $img_path;
+        }
+
         $newVideogame->save();
 
         // Dopo aver salvato il post, controllo se ho ricevuto le console e i genre
@@ -101,10 +107,20 @@ class VideogameController extends Controller
         $videogame->franchise_id = $data['franchise_id'];
         $videogame->pegi = $data['pegi'];
         $videogame->release_date = $data['release_date'];
-        $videogame->immagine = $data['immagine'];
         $videogame->prezzo = $data['prezzo'];
         $videogame->descrizione = $data['descrizione'];
         $videogame->trailer = $data['trailer'];
+
+        Storage::delete($videogame->immagine);
+
+        if(array_key_exists("immagine", $data)){
+            $img_path = Storage::putFile("uploads", $data["immagine"]);
+            $videogame->immagine = $img_path;
+        }
+        else{
+            $videogame->immagine = "";
+        }
+
         $videogame->update();
 
         // Dopo aver salvato il videogioco, controllo se ho ricevuto dei tag consoles
@@ -131,6 +147,11 @@ class VideogameController extends Controller
         // Rimuove tutte le relazioni nella pivot
         $videogame->consoles()->detach();
         $videogame->genres()->detach();
+
+        //rimuove l'immagine (se il videogioco lo ha)
+        if($videogame->immagine){
+            Storage::delete($videogame->immagine);
+        }
 
         // Poi cancella il progetto
         $videogame->delete();

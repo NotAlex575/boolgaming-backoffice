@@ -20,7 +20,7 @@
             <!-- Trailer videogioco -->
             <div class="col-12">
                 <label for="nome" class="form-label text-warning">Link Trailer videogioco</label>
-                <input type="text" class="form-control bg-secondary text-light border border-info" id="trailer" name="trailer" placeholder="Inserisci il link del trailer del videogioco qui" required>
+                <input type="text" class="form-control bg-secondary text-light border border-info" id="trailer" name="trailer" placeholder="Inserisci il link del trailer del videogioco qui (non obbligatorio)">
             </div>
 
             <!-- Franchise -->
@@ -81,21 +81,23 @@
 
             <!-- Immagine -->
             <div class="col-12">
-                <label for="immagine" class="form-label text-warning">Immagine del videogioco</label>
+                <form class="form-control mb-3 d-flex flex-wrap gap-4" method="post" enctype="multipart/form-data">
+                    <label for="immagine" class="form-label text-warning">Immagine del videogioco (non obbligatoria)</label>
+                    <input type="file" class="form-control bg-secondary text-light border border-info" id="immagine" name="immagine" required>
+                </form>
                 <!--
-                <input type="file" class="form-control bg-secondary text-light border border-info" id="immagine" name="immagine" accept="image/*" required>
-                -->
                 <input type="text" class="form-control bg-secondary text-light border border-info" id="immagine" name="immagine" placeholder="Inserisci il link dell'immagine del videogioco qui" required>
+                -->
             </div>
 
             <!-- Prezzo -->
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <label for="prezzo" class="form-label text-warning">Prezzo</label>
                 <input type="number" class="form-control bg-secondary text-light border border-info" id="prezzo" name="prezzo" placeholder="Inserisci il prezzo" step="0.01" required>
             </div>
 
             <!-- Descrizione -->
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <label for="descrizione" class="form-label text-warning">Descrizione videogioco</label>
                 <textarea class="form-control bg-secondary text-light border border-info" name="descrizione" id="descrizione" rows="3" placeholder="Spiegazione del progetto" required></textarea>
             </div>

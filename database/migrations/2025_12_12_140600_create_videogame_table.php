@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string("nome");
             $table->integer("pegi");
             $table->date("release_date");
-            $table->string("immagine");
             $table->decimal("prezzo", 5, 2)->default(0.00);
             $table->string("descrizione");
             $table->string("trailer");

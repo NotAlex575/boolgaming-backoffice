@@ -7,43 +7,100 @@
     <div class="card shadow-lg bg-dark text-light border border-info">
         <div class="card-body p-4">
 
+            <!-- Nome videogioco -->
             <h1 class="card-title mb-3 text-info">Nome Videogioco: {{ $videogame->nome }}</h1>
+
+            <!-- Franchise -->
             <h4 class="card-subtitle mb-4 text-warning">{{ $videogame->franchise->franchise_name }}</h4>
             
 
             <hr class="border-info">
 
-            <!-- Trailer Video con fallback -->
+            <!-- Trailer Video (mostrato solo se esiste un URL) -->
             @if($videogame->trailer)
+
                 @php
+                    // URL del trailer salvato nel database
                     $trailerUrl = $videogame->trailer;
-                    $isValidYouTube = str_contains($trailerUrl, 'youtube.com') || str_contains($trailerUrl, 'youtu.be');
-                    $embedUrl = $isValidYouTube ? str_replace('watch?v=', 'embed/', $trailerUrl) : null;
+
+                    // Rimuove tutti i parametri dopo "&"
+                    // Equivalente a: split("&")[0] in JavaScript
+                    $cleanUrl = explode('&', $trailerUrl)[0];
+
+                    // Verifica se l'URL appartiene a YouTube
+                    $isValidYouTube =
+                        str_contains($cleanUrl, 'youtube.com') ||
+                        str_contains($cleanUrl, 'youtu.be');
+
+                    // Se il link è YouTube, genera l'URL di embed
+                    if ($isValidYouTube) {
+
+                        // Caso URL classico: youtube.com/watch?v=ID
+                        if (str_contains($cleanUrl, 'watch?v=')) {
+                            $embedUrl = str_replace(
+                                'watch?v=',
+                                'embed/',
+                                $cleanUrl
+                            );
+
+                        // Caso URL corto: youtu.be/ID
+                        } elseif (str_contains($cleanUrl, 'youtu.be/')) {
+                            $embedUrl = str_replace(
+                                'youtu.be/',
+                                'www.youtube.com/embed/',
+                                $cleanUrl
+                            );
+                        }
+
+                    // Se NON è YouTube, l'embed non viene creato
+                    } else {
+                        $embedUrl = null;
+                    }
                 @endphp
 
                 <div class="mt-4 text-center">
                     <h5 class="text-warning mb-2">Trailer</h5>
+
+                    <!-- Contenitore responsive 16:9 -->
                     <div class="ratio ratio-16x9 position-relative">
-                        @if($isValidYouTube)
-                            <iframe id="trailerFrame"
-                                    src="{{ $embedUrl }}" 
-                                    title="Trailer di {{ $videogame->nome }}" 
-                                    frameborder="0" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                    allowfullscreen>
-                            </iframe>
+
+                        <!-- Se l'URL è valido, mostra l'iframe -->
+                        @if($isValidYouTube && $embedUrl)
+                            <iframe
+                                src="{{ $embedUrl }}"  
+                                title="Trailer di {{ $videogame->nome }}"
+                                frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen>
+                            </iframe><!-- src="{{ $embedUrl }}" -> URL YouTube embed -->
+
+                        <!-- Altrimenti mostra immagine di fallback -->
                         @else
-                            <img src="{{ asset('wasted/wasted-putther.gif') }}" 
-                                alt="Trailer non trovato o link inserito male...." 
-                                class="img-fluid rounded shadow border border-info" 
-                                style="max-height: 600px;">
-                            <div class="text-warning fw-bold mt-2">Video non trovato o link inserito male....</div>
+                            <img
+                                src="{{ asset('wasted/wasted-putther.gif') }}"
+                                class="img-fluid rounded shadow border border-info"
+                                style="max-height: 600px;"
+                                alt="Trailer non disponibile">
+
+                            <div class="text-warning fw-bold mt-2">
+                                Video non trovato o link inserito male....
+                            </div>
                         @endif
+
                     </div>
                 </div>
             @endif
 
-            <img src="{{ $videogame->immagine }}" class="img-fluid rounded mb-3 border border-info">
+            
+            <!-- Immagine -->
+            
+            @if ($videogame->immagine)
+                <div class="d-flex justify-content-center mt-5">
+                    <img src="{{ asset("storage/". $videogame->immagine) }}" alt="copertina" class="img-fluid rounded mb-3 border border-info">
+                </div>
+            @endif
+
+            <!-- Prezzo -->
 
             <p class="mb-3">
                 <strong>Prezzo: </strong> {{ $videogame->prezzo }}
@@ -68,15 +125,18 @@
                     @endforeach
                 @endif
             </div>
-
+            
+            <!-- Pegi -->
             <h5 class="card-subtitle mt-2 mb-4 text-info">Pegi: {{ $videogame->pegi }}</h5>
 
+            <!-- Data di rilascio -->
             <p class="mb-3">
                 <strong>Data di rilascio</strong> {{ $videogame->release_date }}
             </p>
 
             <hr class="border-info">
 
+            <!-- Descrizione -->
             <p class="card-text fs-5">{{ $videogame->descrizione }}</p>
         </div>
 
@@ -91,6 +151,7 @@
         </div>
     </div>
 
+    <!-- Torna alla index -->
     <a href="{{ route('admin.videogames.index') }}" class="btn btn-outline-info mt-4 px-4">
         Torna indietro alla lista dei videogiochi
     </a>
@@ -133,7 +194,7 @@
     var rockAudio = document.getElementById('theRockSound');
     var rockGif = document.getElementById('rockGif');
 
-    rockAudio.volume = 0.004;      
+    rockAudio.volume = 0.005;      
     rockAudio.playbackRate = 1.8; 
     rockAudio.loop = true;       
 

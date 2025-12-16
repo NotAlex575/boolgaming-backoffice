@@ -8,6 +8,9 @@
 
             <!-- Titolo -->
             <h2 class="text-info fw-bold mb-4 text-center">Chi Sono</h2>
+            <div class="d-flex justify-content-center mt-3 mb-5">
+                <img src="{{ asset("logo/sono_io.png") }}" alt="">
+            </div>
             <p class="lead text-center">Ciao! Sono <strong>Alessandro Agnello</strong>, programmatore appassionato di videogiochi e sviluppo software.</p>
 
             <hr class="border-warning my-4">

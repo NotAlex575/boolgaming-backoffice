@@ -11,13 +11,13 @@ class VideogameSeeder extends Seeder
     {
         $videogames = [
             [
-                "nome" => "The Legend of Zelda: Echoes of Hyrule",
+                "nome" => "The Legend of Zelda: Echoes of Whisdom",
                 "pegi" => 12,
                 "release_date" => "2025-03-15",
                 "immagine" => "zelda_echoes_of_hyrule.jpg",
                 "prezzo" => 74.99,
                 "descrizione" => "Avventura open-world che continua le storie dei cieli di Hyrule.",
-                "trailer" => "https://www.youtube.com/watch?v=zelda_echoes_trailer",
+                "trailer" => "https://www.youtube.com/watch?v=DolGuwvAnfg&pp=ygUtVGhlIExlZ2VuZCBvZiBaZWxkYTogRWNob2VzIG9mIEh5cnVsZSB0cmFpbGVy",
                 "genre_id" => 1,
                 "franchise_id" => 1
             ],

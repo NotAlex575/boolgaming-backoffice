@@ -81,21 +81,31 @@
 
                 <!-- Immagine -->
                 <div class="col-12">
-                    <label for="immagine" class="form-label text-warning">Immagine del videogioco</label>
+                    <form class="form-control mb-3 d-flex flex-wrap gap-4" method="post" enctype="multipart/form-data">
+                        <label for="immagine" class="form-label text-warning">Immagine del videogioco (non obbligatoria)</label>
+                        <input type="file" class="form-control bg-secondary text-light border border-info" id="immagine" name="immagine">
+
+                        <!--mostra l'immagine-->
+                        @if ($videogame->immagine)
+                            <div class="d-flex justify-content-center mt-5">
+                                <img src="{{ asset("storage/". $videogame->immagine) }}" alt="copertina" class="img-fluid rounded mb-3 border border-info">
+                            </div>
+                        @endif
+
+                    </form>
                     <!--
-                    <input type="file" class="form-control bg-secondary text-light border border-info" id="immagine" name="immagine" accept="image/*" required>
+                    <input type="text" class="form-control bg-secondary text-light border border-info" id="immagine" name="immagine" placeholder="Inserisci il link dell'immagine del videogioco qui" required>
                     -->
-                    <input type="text" class="form-control bg-secondary text-light border border-info" id="immagine" name="immagine" value="{{ $videogame->immagine }}" required>
                 </div>
 
                 <!-- Prezzo -->
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <label for="prezzo" class="form-label text-warning">Prezzo</label>
                     <input type="number" class="form-control bg-secondary text-light border border-info" id="prezzo" name="prezzo" value="{{ $videogame->prezzo }}" step="0.01" required>
                 </div>
 
                 <!-- Descrizione -->
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <label for="descrizione" class="form-label text-warning">Descrizione videogioco</label>
                     <textarea class="form-control bg-secondary text-light border border-info" name="descrizione" id="descrizione" rows="3" required>{{ $videogame->descrizione }}</textarea>
                 </div>
