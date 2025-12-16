@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section("title")
+    Dashboard bellissime :) 
+@endsection
+
 @section('content')
 <div class="container my-4">
     <!-- GIF Rickroll -->

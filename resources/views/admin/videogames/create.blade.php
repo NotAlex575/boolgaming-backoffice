@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section("title")
+    Crea nuovo Videogioco
+@endsection
+
 @section('content')
 
 <div class="container mt-5">

@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section("title")
+    Lista Videogiochi
+@endsection
+
 @section('content')
 <div class="container mt-5">
     <h2 class="text-light mb-4">Tutti i videogiochi</h2>

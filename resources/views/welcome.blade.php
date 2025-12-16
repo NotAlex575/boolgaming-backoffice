@@ -1,4 +1,10 @@
 @extends('layouts.app')
+
+@section("title")
+    Benvenuto nel mio bellissimo backoffice!
+@endsection
+
+
 @section('content')
 
 <div class="jumbotron p-5 mb-4 bg-dark text-light rounded-3 shadow-lg border border-primary">

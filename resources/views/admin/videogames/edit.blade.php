@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section("title")
+    Modifica il Videogioco {{ $videogame->nome }}
+@endsection
+
 @section('content')
 
     <div class="container mt-5">

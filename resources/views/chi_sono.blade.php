@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section("title")
+    Ma chi sono io??
+@endsection
+
 @section('content')
 
 <div class="content py-5 bg-secondary bg-opacity-25">

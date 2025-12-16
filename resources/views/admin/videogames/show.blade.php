@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
+@section("title")
+    Vedi il videogioco di {{ $videogame->nome }}
+@endsection
+
 @section('content')
+
+
 <div class="container mt-5">
 
     <!-- Card Videogioco -->
