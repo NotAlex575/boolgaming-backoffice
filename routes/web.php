@@ -13,6 +13,10 @@ Route::get('/chi_sono', function () {
     return view('chi_sono');
 });
 
+Route::get("esercizio" , function() {
+    return view("esercizio");
+});
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -25,7 +29,9 @@ Route::middleware(['auth', 'verified'])
     ->name('admin.')
     ->group(function () {
         Route::get('/', [DashboardController::class, 'dashboard'])->name('dashboard');
-        Route::resource('videogames', VideogameController::class);
+        Route::resource('videogames', VideogameController::class)->missing(function () {
+                return response()->view('error.404', [], 404);
+            });;
 });
 
 Route::fallback(function () {

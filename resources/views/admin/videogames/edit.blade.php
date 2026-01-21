@@ -9,6 +9,8 @@
     <div class="container mt-5">
 
         <form action="{{ route('admin.videogames.update', $videogame->id) }}" method="post" class="p-4 border rounded shadow-sm bg-dark text-light" enctype="multipart/form-data">
+            
+            <!--Serve a proteggere i form dagli attacchi CSRF (Cross-Site Request Forgery).-->
             @csrf
             @method("PUT")
 

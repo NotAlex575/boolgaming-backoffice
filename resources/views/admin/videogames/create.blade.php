@@ -9,6 +9,8 @@
 <div class="container mt-5">
 
     <form action="{{ route('admin.videogames.store') }}" method="post" class="p-4 border rounded shadow-sm bg-dark text-light" enctype="multipart/form-data">
+        
+        <!--Serve a proteggere i form dagli attacchi CSRF (Cross-Site Request Forgery).-->
         @csrf
 
         <h4 class="mb-4 text-center text-info">Aggiungi un nuovo Videogioco!</h4>

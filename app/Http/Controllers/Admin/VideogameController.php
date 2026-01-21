@@ -19,6 +19,9 @@ class VideogameController extends Controller
     public function index()
     {
         $videogames = Videogame::all();
+        //SERVE PER VEDERE LE RELATION CON dd($videogames)
+        $videogames->load('consoles', 'genres', 'franchise');
+        //dd($videogames)
         return view("admin.videogames.index", compact("videogames"));
     }
 
@@ -32,6 +35,7 @@ class VideogameController extends Controller
         $consoles = Console::all();
 
         $genres = Genre::all();
+        
 
         return view("admin.videogames.create", compact("franchises","consoles", "genres"));
     }
@@ -70,6 +74,11 @@ class VideogameController extends Controller
         if ($request->action === "save_add"){
             return redirect()->route("admin.videogame.create");
         }
+
+        //SERVE PER VEDERE LE RELATION CON dd($newVideogame)
+        $newVideogame->load('consoles', 'genres', 'franchise');
+        //dd($newVideogame);
+
         return redirect()->route("admin.videogames.show", $newVideogame->id);
     }
 
@@ -78,6 +87,9 @@ class VideogameController extends Controller
      */
     public function show(Videogame $videogame)
     {
+        //SERVE PER VEDERE LE RELATION CON dd($videogame)
+        $videogame->load('consoles', 'genres', 'franchise');
+        //dd($videogame)
         return view("admin.videogames.show", compact("videogame"));
     }
 
@@ -91,6 +103,9 @@ class VideogameController extends Controller
         $consoles = Console::all();
 
         $genres = Genre::all();
+
+        //SERVE PER VEDERE LE RELATION CON dd($videogame)
+        $videogame->load('consoles', 'genres', 'franchise');
 
         return view("admin.videogames.edit", compact("videogame", "franchises","consoles","genres"));
 
@@ -131,6 +146,10 @@ class VideogameController extends Controller
         } else {
             $videogame->genres()->detach();
         }
+
+        //SERVE PER VEDERE LE RELATION CON dd($videogame)
+        $videogame->load('consoles', 'genres', 'franchise');
+        //dd($videogame)
         return redirect()->route("admin.videogames.show", $videogame);    
     }
 
@@ -139,6 +158,10 @@ class VideogameController extends Controller
      */
     public function destroy(Videogame $videogame)
     {
+        //SERVE PER VEDERE LE RELATION CON dd($videogame)
+        $videogame->load('consoles', 'genres', 'franchise');
+        //dd($videogame)
+        
         // Rimuove tutte le relazioni nella pivot
         $videogame->consoles()->detach();
         $videogame->genres()->detach();

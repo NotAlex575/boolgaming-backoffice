@@ -23,7 +23,7 @@
             <hr class="border-info">
 
             <!-- Trailer Video (mostrato solo se esiste un URL) -->
-            @if($videogame->trailer)
+            @if($videogame->trailer != "notfound")
 
                 @php
                     // URL del trailer salvato nel database
@@ -89,7 +89,7 @@
                                 alt="Trailer non disponibile">
 
                             <div class="text-warning fw-bold mt-2">
-                                Video non trovato o link inserito male....
+                                Video non trovato o url non inserito correttamente....
                             </div>
                         @endif
 
@@ -196,9 +196,9 @@
 </div>
 
 <script>
-    var myModal = document.getElementById('staticBackdrop');
-    var rockAudio = document.getElementById('theRockSound');
-    var rockGif = document.getElementById('rockGif');
+    let myModal = document.getElementById('staticBackdrop');
+    let rockAudio = document.getElementById('theRockSound');
+    let rockGif = document.getElementById('rockGif');
 
     rockAudio.volume = 0.005;      
     rockAudio.playbackRate = 1.8; 
@@ -206,7 +206,7 @@
 
     myModal.addEventListener('shown.bs.modal', function () {
         // Riparte la GIF dall'inizio
-        var src = rockGif.src;
+        let src = rockGif.src;
         rockGif.src = '';
         rockGif.src = src;
         rockAudio.play();

@@ -1,6 +1,10 @@
 <!-- resources/views/errors/404.blade.php -->
 @extends('layouts.app')
 
+@section("title")
+    Pagina o file non trovato!
+@endsection
+
 @section('content')
 <div class="container text-center mt-5">
     <h1>File o pagina non trovata...</h1>
