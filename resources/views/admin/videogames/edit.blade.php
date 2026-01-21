@@ -86,7 +86,7 @@
                 <!-- Immagine -->
                 <div class="col-12">
                     <form class="form-control mb-3 d-flex flex-wrap gap-4" method="post" enctype="multipart/form-data">
-                        <label for="immagine" class="form-label text-warning">Immagine del videogioco (non obbligatoria)</label>
+                        <label for="immagine" class="form-label text-warning">Immagine del videogioco</label>
                         <input type="file" class="form-control bg-secondary text-light border border-info" id="immagine" name="immagine">
 
                         <!--mostra l'immagine-->

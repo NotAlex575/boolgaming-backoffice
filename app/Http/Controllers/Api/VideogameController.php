@@ -16,11 +16,14 @@ class VideogameController extends Controller
         ]);
     }
 
-    public function show(Videogame $videogame){
-        $videogame->load("franchise", "consoles", "genres")->get();
+    public function show(Videogame $videogame)
+    {
+        $videogame->load(['franchise', 'consoles', 'genres']);
+
         return response()->json([
-            "success" => true,
-            "result" => $videogame
+            'success' => true,
+            'result' => $videogame
         ]);
     }
+
 }

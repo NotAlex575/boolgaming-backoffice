@@ -111,14 +111,9 @@ class VideogameController extends Controller
         $videogame->descrizione = $data['descrizione'];
         $videogame->trailer = $data['trailer'];
 
-        Storage::delete($videogame->immagine);
-
         if(array_key_exists("immagine", $data)){
             $img_path = Storage::putFile("uploads", $data["immagine"]);
             $videogame->immagine = $img_path;
-        }
-        else{
-            $videogame->immagine = "";
         }
 
         $videogame->update();

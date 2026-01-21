@@ -6,7 +6,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['*'], // ← Modifica se hai un frontend specifico
+    'allowed_origins' => ['http://localhost:5174'], // ← Modifica se hai un frontend specifico
 
     'allowed_origins_patterns' => [],
 
